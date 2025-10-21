@@ -1,0 +1,50 @@
+# Workflow 名称
+name: "Build and Push Multi-Arch Image to Aliyun"
+
+# 环境变量
+env:
+  REGISTRY: registry.cn-hangzhou.aliyuncs.com
+  IMAGE_NAMESPACE: testwydimage
+  IMAGE_NAME: nacos-bench
+
+# 触发条件
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+# ===================================================================
+# 推荐添加的并发控制块
+# 作用：确保同一分支上只有一个实例在运行，新的推送会自动取消旧的运行
+# ===================================================================
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# 定义作业
+jobs:
+  build-and-push:
+    name: Build and Push Multi-Arch Image
+    runs-on: ubuntu-22.04 # 建议使用更新的版本，如 22.04 或 ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+
+      - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com
+          username: ${{ secrets.USERNAME_ALI }}
+          password: ${{ secrets.PASSWORD_ALI }}
+
+      - name: Build and push multi-arch image
+        run: |
+          docker buildx build --platform=linux/amd64 --push -t registry.cn-hangzhou.aliyuncs.com/testwydimage/${{ env.IMAGE_NAME }}:latest .
