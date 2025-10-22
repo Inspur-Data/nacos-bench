@@ -19,17 +19,17 @@
 ### 使用示例
 1. 服务注册
 ```
-./nacos-bench --nacosServerAddr=127.0.0.1 --perfMode=naming --perfApi=namingReg --perfTps=50 --perfTime=900 --nacosClientCount=100 --serviceCount=10000 --namingMetadataLength=64
+./nacos-bench --nacosServerAddr=127.0.0.1 --nacosPort=8848 --perfMode=naming --perfApi=namingReg --perfTps=50 --perfTime=900 --nacosClientCount=100 --serviceCount=10000 --namingMetadataLength=64 --username=nacos --password=SW5zcHVyTmFjb3MxIQ==
 ```
 2. 服务查询
 ```
-./nacos-bench --nacosServerAddr=127.0.0.1 --perfMode=naming --perfApi=namingQuery --perfTps=50 --perfTime=900 --nacosClientCount=100 --serviceCount=10000 --namingMetadataLength=64
+./nacos-bench --nacosServerAddr=127.0.0.1 --nacosPort=8848 --perfMode=naming --perfApi=namingQuery --perfTps=50 --perfTime=900 --nacosClientCount=100 --serviceCount=10000 --namingMetadataLength=64 --username=nacos --password=SW5zcHVyTmFjb3MxIQ==
 ```
 3. 配置发布
 ```
-./nacos-bench --nacosServerAddr=127.0.0.1 --perfMode=config --perfApi=configPub --perfTps=5 --perfTime=900 --nacosClientCount=100 --configContentLength=64 --configCount=500
+./nacos-bench --nacosServerAddr=127.0.0.1 --nacosPort=8848 --perfMode=config --perfApi=configPub --perfTps=5 --perfTime=900 --nacosClientCount=100 --configContentLength=64 --configCount=500  --username=nacos --password=SW5zcHVyTmFjb3MxIQ==
 ```
 4. 配置查询
 ```
-./nacos-bench --nacosServerAddr=127.0.0.1 --perfMode=config --perfApi=configGet --perfTps=100 --perfTime=900 --nacosClientCount=100 --configContentLength=64 --configCount=500
+./nacos-bench --nacosServerAddr=127.0.0.1 --nacosPort=8848 --perfMode=config --perfApi=configGet --perfTps=100 --perfTime=900 --nacosClientCount=100 --configContentLength=64 --configCount=500 --username=nacos --password=SW5zcHVyTmFjb3MxIQ==
 ```
