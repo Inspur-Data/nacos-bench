@@ -26,6 +26,8 @@ func InitConfig(perfConfig PerfConfig) {
 		LogDir:              "/tmp/nacos/log",
 		CacheDir:            "/tmp/nacos/cache",
 		LogLevel:            "info",
+		Username:             perfConfig.Username,
+		Password:             perfConfig.Password,
 	}
 
 	serverConfigs := make([]constant.ServerConfig, 0)
@@ -33,7 +35,7 @@ func InitConfig(perfConfig PerfConfig) {
 		serverConfigs = append(serverConfigs, constant.ServerConfig{
 			IpAddr:      addr,
 			ContextPath: "/nacos",
-			Port:        8848,
+			Port:        perfConfig.NacosPort,
 		})
 	}
 
