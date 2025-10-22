@@ -58,6 +58,7 @@ func main() {
 	} else {
 		log.Fatal("PERF_MODE is required")
 	}
-
-	select {}
+    // 删掉，防止认为假死
+	// select {}
+	log.Println("Benchmark finished. Exiting.")
 }
